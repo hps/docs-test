@@ -37,7 +37,7 @@ SecureSubmit is packaged as a Javascript library. All you need to do is include 
 
 > For Automatic Javascript For Tokenization
 
-```html
+```
 <script src="securesubmit.js"></script>
 <script type="text/javascript">
 $(function () {
@@ -55,7 +55,7 @@ $(function () {
 
 > Manual Javascript For Tokenization
 
-```html
+```
 <script src="securesubmit.js"></script>
 <script type="text/javascript">
 var tokenValue, tokenType, tokenExpire;

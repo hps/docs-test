@@ -230,9 +230,9 @@ Token Data | Token Rsp Code, Token Rsp Message, Token Value
 
 Multi-Use Tokenization allows a secure and PCI friendly way to store credit card information within your system. A multi-use token can be generated as part of any of our initial gateway calls: charge, verify or authorize.
 
-<asside class="notice">
+<aside class="notice">
 Multi-Use tokens are not enabled by default. You must contact your Heartland Representitive to request this functionality on your account.
-</asside>
+</aside>
 
 > Requesting a multi-use token
 
@@ -562,7 +562,7 @@ Transaction ID | The transaction ID of charge to void.
 
 An edit transaction changes the data on a previously approved Charge or Authorize transaction.
 
-<asside class="note">When the settlement amount of a transaction is altered with this service, the Portico Gateway does not send an update to the Issuer. For example, if the settlement amount of a transaction is reduced, a reversal for the difference is not sent. Likewise, if the amount is increased, an additional authorization is not sent. These additional operations are the responsibility of the POS. Additional features like this are being considered for future releases of the Portico Gateway.</asside>
+<aside class="note">When the settlement amount of a transaction is altered with this service, the Portico Gateway does not send an update to the Issuer. For example, if the settlement amount of a transaction is reduced, a reversal for the difference is not sent. Likewise, if the amount is increased, an additional authorization is not sent. These additional operations are the responsibility of the POS. Additional features like this are being considered for future releases of the Portico Gateway.</aside>
 
 ```csharp
 var authResponse = creditService.Authorize(10.00m, "usd", "put a single or multi-use token here", cardHolder);
