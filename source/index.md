@@ -20,6 +20,7 @@ includes:
   - giftcard
   - recurring
   - errors
+  - certification
   - testcards
 
 search: true
