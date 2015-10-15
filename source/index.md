@@ -22,6 +22,7 @@ includes:
   - errors
   - certification
   - testcards
+  - demo
 
 search: true
 ---
