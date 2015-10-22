@@ -59,7 +59,6 @@ html, body {
 
 .tocify-wrapper {
   transition: left 0.3s ease-in-out;
-
   overflow-y: auto;
   overflow-x: hidden;
   position: fixed;
@@ -69,8 +68,8 @@ html, body {
   bottom: 0;
   width: $nav-width;
   background-color: $nav-bg;
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 400;
 
   // language selector for mobile devices
   .lang-selector {
@@ -93,20 +92,21 @@ html, body {
       background: $nav-bg;
       border-width: 0 0 1px 0;
       border-color: $search-box-border-color;
-      padding: 6px 0 6px 20px;
+      padding: 6px 0 6px 30px;
       box-sizing: border-box;
       margin: $nav-v-padding $nav-padding;
       width: $nav-width - 30;
       outline: none;
       color: $nav-text;
       border-radius: 0; /* ios has a default border radius */
+      border: 1px #c5c5c5 solid;
     }
 
     &:before {
       position: absolute;
-      top: 17px;
-      left: $nav-padding;
-      color: $nav-text;
+      top: 19px;
+      left: $nav-padding + 10px;
+      color: $main-text;
       @extend %icon-search;
     }
   }
@@ -174,9 +174,9 @@ html, body {
 
   // This is the currently selected ToC entry
   .tocify-focus {
-    box-shadow: 0px 1px 0px $nav-active-shadow;
-    background-color: $nav-active-bg;
-    color: $nav-active-text;
+    
+    /*background-color: $nav-active-bg;
+    color: $nav-active-text;*/
   }
 
   // Subheaders are the submenus that slide open
@@ -187,14 +187,9 @@ html, body {
     font-weight: 500;
     .tocify-item>a {
       padding-left: $nav-padding + $nav-indent;
-      font-size: 12px;
+      font-size: 15px;
     }
 
-    // for embossed look:
-    @include embossed-bg;
-    &>li:last-child {
-      box-shadow: none; // otherwise it'll overflow out of the subheader
-    }
   }
 
   .toc-footer {
