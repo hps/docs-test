@@ -35,7 +35,14 @@ html, body {
   background-color: $main-bg;
   height: 100%;
   -webkit-text-size-adjust: none; /* Never autoresize text */
+  padding-top: 25px;
 }
+
+a {
+   color: #3989e3;
+   text-decoration: none;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS
@@ -63,7 +70,7 @@ html, body {
   overflow-x: hidden;
   position: fixed;
   z-index: 30;
-  top: 0;
+  top: 50px;
   left: 0;
   bottom: 0;
   width: $nav-width;
@@ -148,7 +155,7 @@ html, body {
 
 
   .tocify-item>a, .toc-footer li {
-    padding: 0 $nav-padding 0 $nav-padding;
+   padding: 0 $nav-padding 0 $nav-padding + 15px;
     display: block;
     overflow-x: hidden;
     white-space: nowrap;
@@ -174,9 +181,21 @@ html, body {
 
   // This is the currently selected ToC entry
   .tocify-focus {
-    
+     font-weight: 700;
+     
     /*background-color: $nav-active-bg;
     color: $nav-active-text;*/
+     & a:before {
+        content: '>';
+        display: inline-block;
+        float: left;
+        position: relative;
+        left: -14px;
+        top: 0;
+        color: #ccc;
+        margin-right: -14px;
+     }
+  
   }
 
   // Subheaders are the submenus that slide open
@@ -186,7 +205,7 @@ html, body {
     background-color: $nav-subitem-bg;
     font-weight: 500;
     .tocify-item>a {
-      padding-left: $nav-padding + $nav-indent;
+      padding-left: $nav-padding + $nav-indent + 19px;
       font-size: 15px;
     }
 
@@ -195,15 +214,23 @@ html, body {
   .toc-footer {
     padding: 1em 0;
     margin-top: 1em;
-    border-top: 1px dashed $nav-footer-border-color;
 
     li,a {
       color: $nav-text;
       text-decoration: none;
     }
+     
+    a {
+       background: #3989e3;
+       color: #fff;
+       border: 1px #2e6da4 solid;
+       padding: 6px 12px;
+       display: block;
+       margin-left: -15px;
+    }
 
     a:hover {
-      text-decoration: underline;
+       background: #2e6da4;
     }
 
     li {
@@ -229,7 +256,7 @@ html, body {
   padding: 0 1.5em 5em 0; // increase touch size area
   display: none;
   position: fixed;
-  top: 0;
+  top: 50px;
   left: 0;
   z-index: 100;
   color: #000;
@@ -323,6 +350,7 @@ html, body {
   // to place content above the dark box
   position: relative;
   z-index: 30;
+   border-left: 1px #ccc solid;
 
   &:after {
     content: '';
@@ -351,19 +379,29 @@ html, body {
 
   h1 {
     @extend %header-font;
-    font-size: 30px;
-    padding-top: 0.5em;
+    font-size: 36px;
+    padding-top: 1em;
     padding-bottom: 0.5em;
-    border-bottom: 1px solid #ccc;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
     border-top: 1px solid #ddd;
-    background-image: linear-gradient(to bottom, #fff, #f9f9f9);
+    font-weight: 600;
+     
+     &:after {
+        content: "";
+        display: block;
+        background: #ce1025;
+        width: 150px;
+        height: 3px;
+        margin-top: 15px;
+     }
+     
   }
 
   h1:first-child, div:first-child + h1 {
     border-top-width: 0;
     margin-top: 0;
+     padding-top: 0.6em;
   }
 
   h2 {
@@ -464,6 +502,8 @@ html, body {
   }
 
   aside {
+    color: #fff;
+    font-size: 14px;
     padding-top: 1em;
     padding-bottom: 1em;
     @include text-shadow(0 1px 0 lighten($aside-notice-bg, 15%));
@@ -558,6 +598,71 @@ html, body {
   }
 }
 
+
+/* TABLES */
+
+
+table {
+   font-size: 14px;
+   margin-bottom: 20px;
+   background-color: transparent;
+   border-spacing: 0;
+   border-collapse: collapse;
+}
+
+table tr {
+   border-bottom: 1px #ccc solid;  
+}
+
+table thead {
+   border-bottom: 3px #312f2f solid;
+   font-weight: 400;
+}
+
+table thead th {
+   font-weight: 600;
+}
+
+table tbody tr:nth-of-type(odd) {
+   background-color: red !important;
+}
+
+/* heartland header */
+
+.heartland-header {
+   background-color: $aside-warning-bg;
+   color: #fff;
+   display: block;
+   width: 100%;
+   height: 50px;
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 99;
+}
+
+.heartland-logo {
+   width: 110px;
+   height: auto;
+   margin-top: 12px;
+   margin-left: 17px;
+   float: left;
+}
+
+a.back-btn {
+   color: #fff;
+   border: 1px #fff solid;
+   display: block;
+   float: right;
+   padding: 5px 10px;
+   margin: 8px 17px 0 0;
+}
+
+a.back-btn:hover {
+   background: #fff;
+   color: #3989e3;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // RESPONSIVE DESIGN
 ////////////////////////////////////////////////////////////////////////////////
@@ -565,6 +670,7 @@ html, body {
 // There are also a couple styles disperesed
 
 @media (max-width: $tablet-width) {
+
   .tocify-wrapper {
     left: -$nav-width;
 
@@ -612,4 +718,18 @@ html, body {
   %right-col + %left-col {
     margin-top: $main-padding;
   }
+   
+  a.back-btn {
+   display: none;
+  }
+   
+   .heartland-header {
+      text-align: center;
+   }
+   
+   .heartland-logo {
+       float: none;
+      margin-left: 0;
+   }
+   
 }

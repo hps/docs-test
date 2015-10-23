@@ -90,7 +90,7 @@ GEM
       tilt (~> 1.4.1)
     padrino-support (0.12.5)
       activesupport (>= 3.1)
-    rack (1.6.4)
+    rack (1.4.7)
     rack-test (0.6.3)
       rack (>= 1.0)
     rake (10.4.2)
@@ -134,7 +134,11 @@ DEPENDENCIES
   middleman-autoprefixer (~> 2.4.4)
   middleman-gh-pages (~> 0.0.3)
   middleman-syntax (~> 2.0.0)
+  rack (~> 1.4.5)
   rake (~> 10.4.2)
   redcarpet (~> 3.3.2)
   rouge (~> 1.9.0)
   therubyracer (~> 0.12.1)
+
+BUNDLED WITH
+   1.10.6
