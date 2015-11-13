@@ -35,7 +35,6 @@ html, body {
   background-color: $main-bg;
   height: 100%;
   -webkit-text-size-adjust: none; /* Never autoresize text */
-  padding-top: 25px;
 }
 
 a {
@@ -70,7 +69,7 @@ a {
   overflow-x: hidden;
   position: fixed;
   z-index: 30;
-  top: 50px;
+  top: 0;
   left: 0;
   bottom: 0;
   width: $nav-width;
@@ -182,7 +181,7 @@ a {
   // This is the currently selected ToC entry
   .tocify-focus {
      font-weight: 700;
-     
+
     /*background-color: $nav-active-bg;
     color: $nav-active-text;*/
      & a:before {
@@ -195,7 +194,7 @@ a {
         color: #ccc;
         margin-right: -14px;
      }
-  
+
   }
 
   // Subheaders are the submenus that slide open
@@ -219,7 +218,7 @@ a {
       color: $nav-text;
       text-decoration: none;
     }
-     
+
     a {
        background: #3989e3;
        color: #fff;
@@ -386,7 +385,7 @@ a {
     margin-top: 2em;
     border-top: 1px solid #ddd;
     font-weight: 600;
-     
+
      &:after {
         content: "";
         display: block;
@@ -395,7 +394,7 @@ a {
         height: 3px;
         margin-top: 15px;
      }
-     
+
   }
 
   h1:first-child, div:first-child + h1 {
@@ -611,7 +610,7 @@ table {
 }
 
 table tr {
-   border-bottom: 1px #ccc solid;  
+   border-bottom: 1px #ccc solid;
 }
 
 table thead {
@@ -718,18 +717,18 @@ a.back-btn:hover {
   %right-col + %left-col {
     margin-top: $main-padding;
   }
-   
+
   a.back-btn {
    display: none;
   }
-   
+
    .heartland-header {
       text-align: center;
    }
-   
+
    .heartland-logo {
        float: none;
       margin-left: 0;
    }
-   
+
 }
