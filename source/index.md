@@ -16,9 +16,9 @@ includes:
   - introduction
   - authentication
   - creditcard
-  - echeck
   - giftcard
   - recurring
+  - Reporting
   - errors
   - certification
   - testcards

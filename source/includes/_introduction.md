@@ -8,10 +8,6 @@ The SecureSubmit API Library is available in many different languages: PHP, .Net
 You are not alone! If you have any questions while you are working through your development process, please feel free to <a href="mailto:entapp_devportal@e-hps.com">reach out to our team for assistance</a>.
 
 ## Single-Use Tokenization
-The quickest way to get up and running with SecureSubmit is to adhere to our naming conventions when marking up your payment form. Note that the name attributes are not included for any fields that contain card data. This prevents those fields from posting to your server, which is critical in order to avoid PCI requirements. The SecureSubmit plugin attempts to remove those attributes programatically if they exists, but it is best not to include them.
-
-SecureSubmit is packaged as a Javascript library. All you need to do is include the SecureSubmit library, and add a few lines of initialization code. It's that simple!
-
 > Basic HTML Payment Form
 
 ```html
@@ -34,6 +30,10 @@ SecureSubmit is packaged as a Javascript library. All you need to do is include 
     <input type="submit" value="Submit Payment" />
 </form>
 ```
+The quickest way to get up and running with SecureSubmit is to adhere to our naming conventions when marking up your payment form. Note that the name attributes are not included for any fields that contain card data. This prevents those fields from posting to your server, which is critical in order to avoid PCI requirements. The SecureSubmit plugin attempts to remove those attributes programatically if they exists, but it is best not to include them.
+
+SecureSubmit is packaged as a Javascript library. All you need to do is include the SecureSubmit library, and add a few lines of initialization code. It's that simple!
+
 
 > For Automatic Javascript For Tokenization
 

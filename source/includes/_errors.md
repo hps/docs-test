@@ -1,13 +1,5 @@
 # Error Handling
-
-Each Heartland SDK handles the following error types:
-
-Error Type | Meaning
----------- | -------
-HpsInvalidRequestException | handle error for amount less than zero dollars
-HpsAuthenticationException | handle errors related to your HpsServiceConfig (likely an invalid secret api key)
-HpsCreditException | handle card-related exceptions: card declined, processing error, etc
-HpsGatewayException | handle gateway-related exceptions: invalid cc number, gateway-timeout, etc
+> Error Handler
 
 ```ruby
 begin
@@ -96,4 +88,13 @@ catch (CardException e)
 	// handle card-related exceptions: card declined, processing error, etc
 }
 ```
+Each Heartland SDK handles the following error types:
+
+Error Type | Meaning
+---------- | -------
+HpsInvalidRequestException | handle error for amount less than zero dollars
+HpsAuthenticationException | handle errors related to your HpsServiceConfig (likely an invalid secret api key)
+HpsCreditException | handle card-related exceptions: card declined, processing error, etc
+HpsGatewayException | handle gateway-related exceptions: invalid cc number, gateway-timeout, etc
+
 
