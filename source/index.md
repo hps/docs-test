@@ -10,7 +10,7 @@ language_tabs:
   - javascript: nodeJS
 
 toc_footers:
-  - <a href='https://developer.heartlandpaymentsystems.com/SecureSubmit/' target='_blank'>Sign Up for Sandbox API Keys</a>
+  - <a href='https://developer.heartlandpaymentsystems.com/SecureSubmit/Account/Register' target='_blank'>Sign Up for Sandbox API Keys</a>
 
 includes:
   - introduction
