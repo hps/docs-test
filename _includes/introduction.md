@@ -28,7 +28,7 @@ puts "hello."
 print "hello."
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 // nodeJS
 console.log("hello.");
 {% endhighlight %}

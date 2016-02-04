@@ -34,7 +34,7 @@ card_holder = HpsCardHolder()
 card_holder.address.zip = '75024'
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 var cardHolder = {
     address: { zip: "47130" }    // Zip is the only required address field.
 };
@@ -76,7 +76,7 @@ charge_service.charge(10, "usd", "put single or multi-use token here", card_hold
 response = credit_service.charge(10, 'usd', "put single or multi-use token here", card_holder)
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 creditService.chargeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, response) {
   if (err) {
     // handle error
@@ -138,7 +138,7 @@ charge_service.verify("put single or multi-use token here", card_holder)
 response = credit_service.verify("put single or multi-use token here", card_holder)
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 creditService.verifyWithCard("put single or multi-use token here", cardHolder, function (err, response) {
   if (err) {
     // handle error
@@ -196,7 +196,7 @@ charge_service.authorize(50.00, "usd", "put single or multi-use token here", car
 response = credit_service.authorize(10, 'usd', "put single or multi-use token here", card_holder)
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 creditService.authorizeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, response) {
   if (err) {
     // handle error
@@ -373,7 +373,7 @@ auth_response = credit_service.authorize(10, 'usd', "put single or multi-use tok
 capture_response = credit_service.capture(auth_response.transaction_id)
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 var response;
 
 creditService.authorizeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, resp) {
@@ -439,7 +439,7 @@ charge_response = credit_service.charge(10, 'usd', "put single or multi-use toke
 refund_response = credit_service.refund(10, 'usd', charge_response.transaction_id)
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 var response;
 
 creditService.chargeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, resp) {
@@ -496,7 +496,7 @@ auth_response = credit_service.authorize(10, 'usd', "put single or multi-use tok
 reverse_response = credit_service.reverse(auth_response.transaction_id, 10, 'usd')
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 var response;
 
 creditService.chargeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, resp) {
