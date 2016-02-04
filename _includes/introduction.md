@@ -1,37 +1,37 @@
 # Introduction
 > Current Language
 
- ```csharp
+{% highlight csharp %}
  // c#
 System.Console.WriteLine("hello.");
-```
+{% endhighlight %}
 
-```php
+{% highlight php %}
 <?php
 // php
 echo 'hello.';
 ?>
-```
+{% endhighlight %}
 
-```java
+{% highlight java %}
 // java
 System.out.println("hello.");
-```
+{% endhighlight %}
 
-```ruby
+{% highlight ruby %}
 # ruby
 puts "hello."
-```
+{% endhighlight %}
 
-```python
+{% highlight python %}
 # python
 print "hello."
-```
+{% endhighlight %}
 
-```javascript
+{% highlight nodejs %}
 // nodeJS
 console.log("hello.");
-```
+{% endhighlight %}
 
 You no longer have to worry about the burdens of PCI compliance because card data never touches your server. The exchange of sensitive information occurs directly between the consumer and Heartland Payment Systems through our Portico Gateway. Our convention-based jQuery plugin streamlines this process so you don't have to worry about obtaining tokens. The plugin handles that request and appends the resulting token to your form before it posts.
 

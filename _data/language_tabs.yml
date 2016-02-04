@@ -12,6 +12,6 @@
 
 - key: python
   label: Python
-  
-- key: javascript
+
+- key: nodejs
   label: nodeJS
