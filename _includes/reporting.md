@@ -30,7 +30,7 @@ items = charge_service.list(DateTime.now - 10, DateTime.now)
 items = credit_service.list(datetime.datetime.utcnow() + datetime.timedelta(-10), datetime.datetime.utcnow())
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 var startDate = new Date(), endDate = new Date();
 startDate.setDate(startDate.getDate() - 1);
 
@@ -102,7 +102,7 @@ items = credit_service.list(datetime.datetime.utcnow() + datetime.timedelta(-10)
 charge = credit_service.get(items[0].transaction_id)
 {% endhighlight %}
 
-{% highlight nodejs %}
+{% highlight js %}
 var startDate = new Date(), endDate = new Date();
 startDate.setDate(startDate.getDate() - 1);
 
