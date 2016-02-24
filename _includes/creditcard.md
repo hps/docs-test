@@ -421,7 +421,7 @@ creditService.Refund(10.00m, "usd", chargeResponse.TransactionId);
 {% highlight php %}
 <?php
 $response = $chargeService->charge(10, "usd", "put single or multi-use token here", $cardHolder);
-$chargeService->refundTransaction(10, "usd", $response->transactionId);
+$chargeService->refund(10, "usd", $response->transactionId);
 {% endhighlight %}
 
 {% highlight java %}
