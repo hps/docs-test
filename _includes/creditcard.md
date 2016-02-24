@@ -478,7 +478,7 @@ creditService.Reverse(authResponse.TransactionId, 10.00m, "usd");
 {% highlight php %}
 <?php
 $response = $chargeService->authorize(10, "usd", "put single or multi-use token here", $cardHolder);
-$chargeService->reverseTransaction($response->transactionId, 10, "usd");
+$chargeService->reverse($response->transactionId, 10, "usd");
 {% endhighlight %}
 
 {% highlight java %}
