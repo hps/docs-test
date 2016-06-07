@@ -1,3 +1,9 @@
+---
+title: Authentication
+permalink: /authentication/
+layout: default
+---
+
 # Authentication
 
 {% highlight csharp %}
@@ -21,7 +27,7 @@ HpsChargeService chargeService = new HpsChargeService(config);
 {% highlight ruby %}
 Hps.configure do |config|
     config.secret_api_key = "secret api key"
-end  
+end
 
 charge_service = Hps::HpsChargeService.new
 {% endhighlight %}

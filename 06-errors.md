@@ -1,3 +1,9 @@
+---
+title: Error Handling
+permalink: /error-handling/
+layout: default
+---
+
 # Error Handling
 > Error Handler
 

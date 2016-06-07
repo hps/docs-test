@@ -1,3 +1,9 @@
+---
+title: PayPa Express Payments
+permalink: /paypal-express-payments/
+layout: default
+---
+
 # PayPal Express Payments
 
 Heartland has partnered with PayPal to provide merchants the ability to process PayPal Express payments through the same Heartland Portico gateway as credit card payments. Merchant who choose to integrate PayPal Express payments through Heartland benefit from consolidated reporting, a single point of contact for both payment types, and more!

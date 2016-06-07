@@ -1,3 +1,9 @@
+---
+title: Gift Card Payments
+permalink: /gift-card-payments/
+layout: default
+---
+
 # Gift Card Payments
 Merchant gift card programs lead customers to spend—on average—60 percent more than the value of their gift cards. In addition, 72 percent of shoppers also shop for themselves when they go online or in-store to purchase a gift card.
 

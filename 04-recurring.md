@@ -1,3 +1,9 @@
+---
+title: Recurring Payments
+permalink: /recurring-payments/
+layout: default
+---
+
 # Recurring Payments
  > Create a Customer
 
@@ -111,7 +117,7 @@ Follow the example below to create a new Payment Method for a customer.The objec
 {% highlight csharp %}
 var schedule = new HpsPayPlanSchedule
 {
-        ScheduleIdentifier = Guid.NewGuid().ToString(),    
+        ScheduleIdentifier = Guid.NewGuid().ToString(),
         CustomerKey = paymentMethod.CustomerKey,
         PaymentMethodKey = _paymentMethod.PaymentMethodKey,
         SubtotalAmount = new HpsPayPlanAmount("100"),
@@ -208,7 +214,7 @@ $newPaymentSchedule->scheduleStatus     = HpsPayPlanScheduleStatus::ACTIVE
 ### Failed Scheduled Transactions
 A schedule with a Failed status is an indication that the merchant must reach out to the customer to obtain new payment information.  PayPlan has an email notification that a merchant can opt in to receive a list of all schedules that failed during the nightly processing.
 If a card exceeds retries with non-fatal decline codes, then the schedule status changes to Failed but the payment status remains Active.
-This email notification is based on emailReceipt and emailAdvanceNotice 
+This email notification is based on emailReceipt and emailAdvanceNotice
 
 #### Expired
 There is logic in place for recurring billing; it allows us to drop the expiration date on a card if it is less than current MMYYYY and it’s a recurring billing transaction. Eventually these will decline and/or trigger a fatal error. -below-
@@ -217,10 +223,10 @@ There is logic in place for recurring billing; it allows us to drop the expirati
 If a card is declined when processing a schedule, the “Failure Count” field is incremented.  If the Failure Count exceeds the reprocessing count, then the schedule status is also updated to ‘Failed’.  Each subsequent try is aproximately 24 hours after.
 
 #### Communication Failures
-If there is a communication failure, the schedule will fall into an error queue and no updates will be made.  Any schedule in the error queue is manually reviewed the next business day.  This is exceptionally rare and we do not typically provide any information to a merchant when an instance occurs.  
+If there is a communication failure, the schedule will fall into an error queue and no updates will be made.  Any schedule in the error queue is manually reviewed the next business day.  This is exceptionally rare and we do not typically provide any information to a merchant when an instance occurs.
 
 
-#### Other fatal errors 
+#### Other fatal errors
 ·         Invalid
 ·         Expired
 ·         Lost/Stolen

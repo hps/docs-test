@@ -1,3 +1,9 @@
+---
+title: Test Credit Cards
+permalink: /test-credit-cards/
+layout: default
+---
+
 # Test Credit Cards
 
 The following card numbers are used by our Certification environment to verify that your tests worked. Note that while variations (such as 4111111111111111) will work for general testing the cards listed below are required to complete certification.
