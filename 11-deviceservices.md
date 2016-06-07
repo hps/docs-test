@@ -1,3 +1,9 @@
+---
+title: Device Services
+permalink: /device-services/
+layout: default
+---
+
 # Device Services (Orca Service)
 This is a wrapper for the Orca device services
 
@@ -47,7 +53,7 @@ Parameter | Description
 --------- | -----------
 merchantId | String with the assigned merchantID
 email | String with the email address to be sent the activation code.
- 
+
 ### Returns: DeviceActivationResponse
 
 Parameter | Description
@@ -61,7 +67,7 @@ SoftwareVersion | Device fields
 ConfigurationName | Device fields
 PeripheralName | Device fields
 PeripheralSoftware | Device fields
- 
+
 {% highlight csharp %}
 
 //Create the config as mentioned above
@@ -71,7 +77,7 @@ var config = new HpsOrcaServiceConfig {...}
 config.UserName = "admin";
 config.Password = "password";
 
-//Create the service with the config object.           
+//Create the service with the config object.
 var orcaService = new HpsOrcaService(config);
 
 var activationCodeResponse = orcaService.DeviceActivationRequest("777700857994", "someone@someplace.com");
@@ -130,11 +136,11 @@ var config = new HpsOrcaServiceConfig {...}
 config.UserName = "777700857994";
 config.Password = "$Test1234";
 
-//Create the service with the config object.           
+//Create the service with the config object.
 var orcaService = new HpsOrcaService(config);
 
 var apiKeyFromCodeResponse = orcaService.ActivateDevice("777700857994", activationCodeResponse.ActivationCode);
-	
+
 {% endhighlight %}
 
 {% highlight java %}
@@ -178,11 +184,11 @@ config.Password = "$Test1234";
 config.SiteId = 101436;
 config.LicenseId = 101433;
 
-//Create the service with the config object.           
+//Create the service with the config object.
 var orcaService = new HpsOrcaService(config);
 
 string apiKey = orcaService.GetDeviceAPIKey();
-	
+
 {% endhighlight %}
 
 {% highlight java %}
@@ -220,7 +226,7 @@ var config = new HpsOrcaServiceConfig {...}
 //Add you secret API key
 config.SecretApiKey = apiKey;
 
-//Create the service with the config object.         
+//Create the service with the config object.
 var orcaService = new HpsOrcaService(config);
 
 try

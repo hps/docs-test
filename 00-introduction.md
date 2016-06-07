@@ -1,3 +1,9 @@
+---
+title: Introduction
+permalink: /introduction/
+layout: default
+---
+
 # Introduction
 > Current Language
 
@@ -103,7 +109,7 @@ hps.tokenize({
       exp_year: 2015
     },
     success: function (response) {
-      /** Place additional validation/business logic here. */     
+      /** Place additional validation/business logic here. */
 
       tokenValue = response.token_value;
       tokenType = response.token_type;

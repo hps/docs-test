@@ -1,3 +1,9 @@
+---
+title: Tokenization Demo
+permalink: /tokenization-demo/
+layout: default
+---
+
 # Tokenization Demo
 
 <a id="standard-code-sample"></a>

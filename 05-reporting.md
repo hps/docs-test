@@ -1,3 +1,9 @@
+---
+title: Reporting
+permalink: /reporting/
+layout: default
+---
+
 # Reporting
 
 ## List Transactions

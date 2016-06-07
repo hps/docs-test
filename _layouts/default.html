@@ -13,8 +13,7 @@ License for the specific language governing permissions and limitations
 under the License. -->
 
 <meta charset="utf-8">
-{% assign base = site.url | append: site.base_url %}
-<link href="{{ base }}/Content/css/screen.css" rel="stylesheet" rel="text/css">
+<link href="/Content/css/screen.css" rel="stylesheet" rel="text/css">
 <script type="text/javascript">
   if (!window.jQuery) {
     var s = document.createElement('script');
@@ -36,8 +35,17 @@ under the License. -->
     </div>
     <ul class="search-results"></ul>
   {% endif %}
-  <div id="toc">
-  </div>
+  <ul id="docs-toc">
+    {% for node in site.pages %}
+      {% if node.hide %}{% break %}{% endif %}
+      <li>
+        <a href="{{ node.url | prepend: '/SecureSubmit/Documentation' }}">{{ node.title }}</a>
+        {% if node.url == page.url %}
+          <div id="toc"></div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
   {% if site.data.toc_footers %}
     <ul class="toc-footer">
       {% for footer in site.data.toc_footers %}
@@ -50,12 +58,6 @@ under the License. -->
   <div class="content">
     {{ page.content }}
 
-    {% if site.data.sections %}
-      {% for section in site.data.sections %}
-        {% capture section_md %}{% include {{section}}.md %}{% endcapture %}
-        {{ section_md | markdownify }}
-      {% endfor %}
-    {% endif %}
   </div>
   <div class="dark-box">
     {% if site.data.language_tabs %}
@@ -68,22 +70,18 @@ under the License. -->
   </div>
 </div>
 
-<script src="{{ base }}/Scripts/all.js"></script>
+<script src="/Scripts/all.js"></script>
 <script type="text/javascript">
   (function (window, document, undefined) {
     $(document).ready(function() {
       setupLanguages({{ site.data.language_tabs | map: 'key' | jsonify}});
 
-      var framed = false;
+      $('.dark-box .lang-selector').appendTo('.nav-sdks-documentation');
+      $('.search, .search-results').appendTo('.nav-sdks-documentation');
+      $('#docs-toc').appendTo('.nav-sdks-documentation');
 
       {% unless jekyll.environment == 'development' %}
-        try {
-          framed = window.self !== window.top;
-        } catch (e) {
-          framed = true;
-        }
-
-        if (!framed) {
+        if (window.location.hostname.indexOf('heartlandpaymentsystems.com') === -1) {
           window.location = 'https://developer.heartlandpaymentsystems.com/SecureSubmit/Documentation';
         }
       {% endunless %}
