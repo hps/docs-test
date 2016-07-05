@@ -5,9 +5,8 @@ layout: default
 ---
 
 # Device Services (Activation Service)
-This is a wrapper for the Activation device services
 
-The first step is to register for device activation to generate an activation code.  This code can then register the device and generate the secret API key to use for other services.
+This is a wrapper for the Activation device service. The first step is to get an activation code from integration@e-hps.com
 
 ## Create an ActivationServiceConfig object for settings.
 
@@ -40,7 +39,7 @@ config.IsTest = true; //Use for certifications and develpoment testing.  false b
 // coming soon
 {% endhighlight %}
 
-## Activate your device and getting your API key for the activation code.
+## Activate your device and get your API key for the activation code.
 
 ### Parameters:
 
