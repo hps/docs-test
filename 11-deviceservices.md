@@ -4,26 +4,41 @@ permalink: /device-services/
 layout: default
 ---
 
-# Device Services (Activation Service)
+# Device Services (Orca Service)
 
-This is a wrapper for the Activation device service. The first step is to get an activation code from integration@e-hps.com
+This is a wrapper for the Orca device services. The first step is to register for device activation to generate an activation code.  This code can then register the device and generate the secret API key to use for other services.
 
-## Create an ActivationServiceConfig object for settings.
 
-{% highlight php %}
-$config = new \HpsActivationServiceConfig();
-$config->setIsTest(true); //Use for certifications and develpoment testing.  false by default.
-{% endhighlight %}
+## Create an OrcaServiceConfig object for settings.
 
 {% highlight csharp %}
-var config = new HpsActivationServiceConfig
+var config = new HpsOrcaServiceConfig
 {
+	DeviceId = 5315938,
+	LicenseId = 101433,
+	UserName = "777700857994",
+	Password = "$Test1234",
+	SiteId = 101436,
+	SiteTrace = "trace0001",
+	VersionNumber = "1234",
 	IsTest = true, //Use for certifications and develpoment testing.  false by default.
+	ApplicationId = "Mobuyle Retail",
+	HardwareTypeName = "Heartland Mobuyle"
 };
 {% endhighlight %}
 
 {% highlight java %}
-HpsActivationServiceConfig config = new HpsActivationServiceConfig();
+
+HpsOrcaServiceConfig config = new HpsOrcaServiceConfig();
+config.setDeviceId(5315938);
+config.setLicenseId(101433);
+config.setPassword("$Test1234");
+config.setUserName("777700857994");
+config.setSiteId(101436);
+config.setSiteTrace("trace0001");
+config.setVersionNumber("1234");
+config.ApplicationId = "Mobuyle Retail";
+config.HardwareTypeName = "Heartland Mobuyle";
 config.IsTest = true; //Use for certifications and develpoment testing.  false by default.
 {% endhighlight %}
 
@@ -39,7 +54,70 @@ config.IsTest = true; //Use for certifications and develpoment testing.  false b
 // coming soon
 {% endhighlight %}
 
-## Activate your device and get your API key for the activation code.
+## Register to get a device activation code (in results and emailed).
+
+### Parameters:
+
+Parameter | Description
+--------- | -----------
+merchantId | String with the assigned merchantID
+email | String with the email address to be sent the activation code.
+
+### Returns: DeviceActivationResponse
+
+Parameter | Description
+--------- | -----------
+MerchantId | Issued merchant ID
+DeviceId | This deviceID
+Email | The email address sent the activation code
+ApplicationId | Device fields
+HardwareTypeName | Device fields
+SoftwareVersion | Device fields
+ConfigurationName | Device fields
+PeripheralName | Device fields
+PeripheralSoftware | Device fields
+
+{% highlight csharp %}
+
+//Create the config as mentioned above
+var config = new HpsOrcaServiceConfig {...}
+
+//Uses the vendors credentials rather than the merchants.
+config.UserName = "admin";
+config.Password = "password";
+
+//Create the service with the config object.
+var orcaService = new HpsOrcaService(config);
+
+var activationCodeResponse = orcaService.DeviceActivationRequest("777700857994", "someone@someplace.com");
+
+{% endhighlight %}
+
+{% highlight java %}
+
+//Create the config as mentioned above
+//Uses the vendors credentials rather than the merchants.
+config.setUserName("admin");
+config.setPassword("password");
+
+HpsOrcaService service = new HpsOrcaService(config);
+HpsDeviceActivationResponse response = null;
+try {
+	response = service.deviceActivationRequest("777700857994", "someone@someplace.com");
+	if (response != null)
+	{
+		activationCode = response.activationCode;
+	}
+
+}catch (Exception e) {
+	e.printStackTrace();
+
+	//Handle failure ....
+}
+
+{% endhighlight %}
+
+## Activate your device and getting your API key for the activation code.
 
 ### Parameters:
 
@@ -58,42 +136,30 @@ ApplicationId | Device fields
 ActivationCode | The activation code
 SecretApiKey | The API used in future calls. Store securely.
 
-{% highlight php %}
-//Create the config as mentioned above
-$config = new \HpsActivationServiceConfig();
-$config->setIsTest(true); //Use for certifications and develpoment testing.  false by default.
-
-//Create the service with the config object.
-$activationService = new HpsActivationService($config);
-
-//activation_code may be obtained from integration@e-hps.com
-//$ActivationCode = 111111;
-$apiKeyFromCodeResponse = $activationService->activateDevice("777700857994", $ActivationCode);
-{% endhighlight %}
-
 {% highlight csharp %}
 //Create the config as mentioned above
-var config = new HpsActivationServiceConfig {...}
+var config = new HpsOrcaServiceConfig {...}
+
+//Add merchants credentials
+config.UserName = "777700857994";
+config.Password = "$Test1234";
 
 //Create the service with the config object.
-var activationService = new HpsActivationService(config);
+var orcaService = new HpsOrcaService(config);
 
-//activation_code may be obtained from integration@e-hps.com
-// var ActivationCode = 111111;
-var apiKeyFromCodeResponse = activationService.ActivateDevice("777700857994", ActivationCode);
+var apiKeyFromCodeResponse = orcaService.ActivateDevice("777700857994", activationCodeResponse.ActivationCode);
+
 {% endhighlight %}
 
 {% highlight java %}
 //Create the config as mentioned above
-HpsActivationServiceConfig config = new HpsActivationServiceConfig();
-config.IsTest = true; //Use for certifications and develpoment testing.  false by default.
+//Add merchants credentials
+config.setUserName("777700857994");
+config.setPassword("$Test1234");
 
-
-HpsActivationService service = new HpsActivationService(config);
+HpsOrcaService service = new HpsOrcaService(config);
 HpsDeviceActivationKeyResponse response = null;
 
-//activation_code may be obtained from integration@e-hps.com
-// var activationCode = 111111;
 try {
     response = service.activateDevice("777700857994", activationCode);
     if (response != null)
@@ -115,6 +181,94 @@ try {
 # coming soon
 {% endhighlight %}
 
-{% highlight js %}
-// coming soon
+## Get your API key for the registered device.
+
+### Returns: String - SecretApiKey
+
+{% highlight csharp %}
+
+//Create the config as mentioned above
+var config = new HpsOrcaServiceConfig {...}
+
+//Add merchants credentials
+config.UserName = "777700857994";
+config.Password = "$Test1234";
+config.SiteId = 101436;
+config.LicenseId = 101433;
+
+//Create the service with the config object.
+var orcaService = new HpsOrcaService(config);
+
+string apiKey = orcaService.GetDeviceAPIKey();
+
+{% endhighlight %}
+
+{% highlight java %}
+
+//Create the config as mentioned above
+//Add merchants credentials
+config.setUserName("777700857994");
+config.setPassword("$Test1234");
+config.setSiteId(101436);
+config.setLicenseId(101433);
+config.setDeviceId(5315938);
+
+HpsOrcaService service = new HpsOrcaService(config);
+
+try {
+	String response = service.getDeviceAPIKey();
+	return response;
+}catch (Exception e){
+	e.printStackTrace();
+
+	//Handle failure ....
+}
+
+{% endhighlight %}
+
+## Get device parameters.
+
+### Returns: String - JSON of various parameters
+
+{% highlight csharp %}
+
+//Create the config as mentioned above
+var config = new HpsOrcaServiceConfig {...}
+
+//Add you secret API key
+config.SecretApiKey = apiKey;
+
+//Create the service with the config object.
+var orcaService = new HpsOrcaService(config);
+
+try
+{
+	string response = orcaService.GetDeviceParameters();
+	return response;
+}
+catch (Exception e)
+{
+	//No parameters found throws server 400 messages.
+	return "No Parameters";
+}
+
+{% endhighlight %}
+
+{% highlight java %}
+
+//Create the config as mentioned above
+//Add the api key
+config.setSecretAPIKey(apiKey);
+
+HpsOrcaService service = new HpsOrcaService(config);
+
+try {
+	String response = service.getDeviceParameters();
+	return response;   //JSON String
+}catch (Exception e){
+	e.printStackTrace();
+	return "No Parameters";
+	//No parameters found throws server 400 messages.
+}
+
 {% endhighlight %}
