@@ -289,10 +289,10 @@ under the License.
   // if a button is clicked, add the state to the history
   function pushURL(language) {
     if (!history) { return; }
-    var hash = window.location.hash;
-    if (hash) {
-      hash = hash.replace(/^#+/, '');
-    }
+    //var hash = window.location.hash;
+    //if (hash) {
+    //  hash = hash.replace(/^#+/, '');
+    //}
     history.pushState({}, '', '?' + generateNewQueryString(language) + '#' + hash);
 
     // save language as next default
