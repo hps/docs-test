@@ -76,21 +76,12 @@ under the License. -->
 <script type="text/javascript">
   (function (window, document, undefined) {
       $(document).ready(function() {
-
-          var languagesJSON = {{ site.data.language_tabs | map: 'key' | jsonify}};
-
-          //setupLanguages();
+          window.languagesJSON = {{ site.data.language_tabs | map: 'key' | jsonify}};
 
           $('.search, .search-results').appendTo('.nav-sdks-documentation');
+          $('.search, .search-results').hide();
 
           $('#docs-toc').appendTo('.nav-sdks-documentation');
-
-          {% unless jekyll.environment == 'development' %}
-            if (window.location.hostname.indexOf('heartlandpaymentsystems.com') === -1) {
-              window.location = 'https://developer.heartlandpaymentsystems.com/SecureSubmit/Documentation';
-            }
-          {% endunless %}
         });
   }(window, window.document));
-
 </script>
