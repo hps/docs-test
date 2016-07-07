@@ -39,7 +39,7 @@ under the License. -->
     {% for node in site.pages %}
       {% if node.hide %}{% break %}{% endif %}
       <li>
-        <a href="{{ node.url | prepend: '/SecureSubmit/Documentation' }}">{{ node.title }}</a>
+        <a href="{{ node.url | prepend: '/Documentation/Index' }}">{{ node.title }}</a>
         {% if node.url == page.url %}
           <div id="toc"></div>
         {% endif %}
@@ -75,21 +75,12 @@ under the License. -->
 <script type="text/javascript">
   (function (window, document, undefined) {
       $(document).ready(function() {
+          window.languagesJSON = {{ site.data.language_tabs | map: 'key' | jsonify}};
 
-          var languagesJSON = {{ site.data.language_tabs | map: 'key' | jsonify}};
-
-          //setupLanguages();
-          
           $('.search, .search-results').appendTo('.nav-sdks-documentation');
+          $('.search, .search-results').hide();
 
           $('#docs-toc').appendTo('.nav-sdks-documentation');
-
-          {% unless jekyll.environment == 'development' %}
-            if (window.location.hostname.indexOf('heartlandpaymentsystems.com') === -1) {
-              //window.location = 'https://developer.heartlandpaymentsystems.com/SecureSubmit/Documentation';
-            }
-          {% endunless %}
         });
   }(window, window.document));
-
 </script>
