@@ -6,20 +6,6 @@ layout: default
 
 # Tokenization Demo
 
-<a id="standard-code-sample"></a>
-> Standard Tokenization
-
-{% highlight html %}
-{% include samples/standard.html %}
-{% endhighlight %}
-
-<a id="iframes-code-sample"></a>
-> iFrames Tokenization
-
-{% highlight html %}
-{% include samples/iframes.html %}
-{% endhighlight %}
-
 Take a look at the following examples:
 
 <table>
@@ -39,11 +25,25 @@ Take a look at the following examples:
   </tr>
 </table>
 
-To a customer, both examples are the same, but according to PCI-DSS, only `Example B` will help keep you PCI compliant. The fields in `Example A` are your typical `input` elements that are hosted on your payment page. The fields in `Example B` are also your typical `input` elements, but they are wrapped inside of `iframe` elements that are hosted on Heartland's payment gateway.
+To a customer, both examples are the same, but according to PCI-DSS, only `Example B` will help keep you PCI compliant with as little scope as possible. The fields in `Example A` are your typical `input` elements that are hosted on your payment page. The fields in `Example B` are also your typical `input` elements, but they are wrapped inside of `iframe` elements that are hosted on Heartland's payment gateway.
 
 While there are some limitations to using `iframe` elements, our Javascript library has tried to remove most pain points for integrators wishing to embed these fields seamlessly into their existing solutions.
 
 Feel free to click the `Show Code` buttons in the samples, if you haven't already, to view the necessary HTML and Javascript for each solution.
+
+<a id="standard-code-sample"></a>
+> Standard Tokenization
+
+{% highlight html %}
+{% include samples/standard.html %}
+{% endhighlight %}
+
+<a id="iframes-code-sample"></a>
+> iFrames Tokenization
+
+{% highlight html %}
+{% include samples/iframes.html %}
+{% endhighlight %}
 
 <script type="text/javascript">
   (function (document, Heartland) {

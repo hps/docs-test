@@ -39,9 +39,10 @@ under the License. -->
     {% for node in site.pages %}
       {% if node.hide %}{% break %}{% endif %}
       <li>
-        <a href="{{ node.url | prepend: '/Documentation/Index' }}">{{ node.title }}</a>
         {% if node.url == page.url %}
           <div id="toc"></div>
+        {% else %}
+          <a href="{{ node.url | prepend: '/Documentation' }}">{{ node.title }}</a>
         {% endif %}
       </li>
     {% endfor %}

@@ -65,6 +65,17 @@ a {
     $nav-subitem-bg;
 }
 
+.tocify {
+  ul {
+    padding: 0;
+  }
+
+  &>.tocify-header {
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .tocify-wrapper {
   transition: left 0.3s ease-in-out;
   overflow-y: auto;

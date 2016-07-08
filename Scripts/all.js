@@ -4061,7 +4061,7 @@ jQuery.fn.highlight = function (words, options) {
 
   var makeToc = function() {
     global.toc = $("#toc").tocify({
-      selectors: 'h2',
+      selectors: 'h1,h2',
       extendPage: false,
       theme: 'none',
       smoothScroll: false,

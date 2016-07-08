@@ -6,6 +6,10 @@ layout: default
 
 # Authentication
 
+Authentication with Heartland is simple: you will pass your Secret API Key (found on your Account Settings screen) to the SDK via your configuration.
+
+> Create an authentication object
+
 {% highlight csharp %}
 var config = new HpsServicesConfig()  {  SecretApiKey = "secret api key"  };
 var creditService = new HpsCreditService(config);
@@ -39,4 +43,6 @@ config.secret_api_key = 'secret api key'
 credit_service = HpsCreditService(config)
 {% endhighlight %}
 
-Authentication with Heartland is simple: you will pass your Secret API Key (found on your Account Settings screen) to the SDK via your configuration.
+{% highlight js %}
+// coming soon
+{% endhighlight %}
