@@ -8,17 +8,17 @@ layout: default
 
 This is a wrapper for the Activation device service. The first step is to get an activation code from integration@e-hps.com
 
-## Create an ActivationServiceConfig object for settings.
+> Create an HpsActivationServiceConfig object for settings.
 
 {% highlight php %}
-$config = new \HpsActivationServiceConfig();
+$config = new HpsActivationServiceConfig();
 $config->setIsTest(true); //Use for certifications and develpoment testing.  false by default.
 {% endhighlight %}
 
 {% highlight csharp %}
 var config = new HpsActivationServiceConfig
 {
-	IsTest = true, //Use for certifications and develpoment testing.  false by default.
+    IsTest = true, //Use for certifications and develpoment testing.  false by default.
 };
 {% endhighlight %}
 
@@ -58,6 +58,8 @@ ApplicationId | Device fields
 ActivationCode | The activation code
 SecretApiKey | The API used in future calls. Store securely.
 
+> Activate your device
+
 {% highlight php %}
 //Create the config as mentioned above
 $config = new \HpsActivationServiceConfig();
@@ -66,21 +68,24 @@ $config->setIsTest(true); //Use for certifications and develpoment testing.  fal
 //Create the service with the config object.
 $activationService = new HpsActivationService($config);
 
-//activation_code may be obtained from integration@e-hps.com
-//$ActivationCode = 111111;
-$apiKeyFromCodeResponse = $activationService->activateDevice("777700857994", $ActivationCode);
+//activationCode may be obtained from integration@e-hps.com
+//$activationCode = 111111;
+$apiKeyFromCodeResponse = $activationService->activateDevice("777700857994", $activationCode);
 {% endhighlight %}
 
 {% highlight csharp %}
 //Create the config as mentioned above
-var config = new HpsActivationServiceConfig {...}
+var config = new HpsActivationServiceConfig
+{
+    IsTest = true
+};
 
 //Create the service with the config object.
 var activationService = new HpsActivationService(config);
 
-//activation_code may be obtained from integration@e-hps.com
-// var ActivationCode = 111111;
-var apiKeyFromCodeResponse = activationService.ActivateDevice("777700857994", ActivationCode);
+//activationCode may be obtained from integration@e-hps.com
+//var activationCode = 111111;
+var apiKeyFromCodeResponse = activationService.ActivateDevice("777700857994", activationCode);
 {% endhighlight %}
 
 {% highlight java %}
@@ -94,16 +99,15 @@ HpsDeviceActivationKeyResponse response = null;
 //activation_code may be obtained from integration@e-hps.com
 // var activationCode = 111111;
 try {
-	response = service.activateDevice("777700857994", activationCode);
-	if (response != null)
-	{
-	    apiKey = response.apiKey;
-	}
+    response = service.activateDevice("777700857994", activationCode);
+    if (response != null)
+    {
+        apiKey = response.apiKey;
+    }
+} catch (Exception e) {
+    e.printStackTrace();
 
-}catch (Exception e){
-	e.printStackTrace();
-
-	//Handle failure ....
+    //Handle failure ....
 }
 {% endhighlight %}
 
