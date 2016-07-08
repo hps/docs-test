@@ -5,6 +5,11 @@ layout: default
 ---
 
 # Introduction
+
+You no longer have to worry about the burdens of PCI compliance because card data never touches your server. The exchange of sensitive information occurs directly between the consumer and Heartland Payment Systems through our Portico Gateway. Our convention-based jQuery plugin streamlines this process so you don't have to worry about obtaining tokens. The plugin handles that request and appends the resulting token to your form before it posts.
+
+The SecureSubmit API Library is available in many different languages: PHP, .Net, Java, Ruby, and Python. This documentation is intended to speed up the process of implementing the SDK into your solution by providing sample code and instructions
+
 > Current Language
 
 {% highlight csharp %}
@@ -39,14 +44,13 @@ print "hello."
 console.log("hello.");
 {% endhighlight %}
 
-You no longer have to worry about the burdens of PCI compliance because card data never touches your server. The exchange of sensitive information occurs directly between the consumer and Heartland Payment Systems through our Portico Gateway. Our convention-based jQuery plugin streamlines this process so you don't have to worry about obtaining tokens. The plugin handles that request and appends the resulting token to your form before it posts.
-
-The SecureSubmit API Library is available in many different languages: PHP, .Net, Java, Ruby, and Python. This documentation is intended to speed up the process of implementing the SDK into your solution by providing sample code and instructions
-
 ## Developer Support
 You are not alone! If you have any questions while you are working through your development process, please feel free to <a href="mailto:entapp_devportal@e-hps.com">reach out to our team for assistance</a>.
 
 ## Single-Use Tokenization
+
+The quickest way to get up and running with SecureSubmit is to adhere to our naming conventions when marking up your payment form. Note that the name attributes are not included for any fields that contain card data. This prevents those fields from posting to your server, which is critical in order to avoid PCI requirements. The SecureSubmit plugin attempts to remove those attributes programmatically if they exists, but it is best not to include them.
+
 > Basic HTML Payment Form
 
 {% highlight html %}
@@ -70,10 +74,7 @@ You are not alone! If you have any questions while you are working through your 
 </form>
 {% endhighlight %}
 
-The quickest way to get up and running with SecureSubmit is to adhere to our naming conventions when marking up your payment form. Note that the name attributes are not included for any fields that contain card data. This prevents those fields from posting to your server, which is critical in order to avoid PCI requirements. The SecureSubmit plugin attempts to remove those attributes programmatically if they exists, but it is best not to include them.
-
 SecureSubmit is packaged as a Javascript library. All you need to do is include the SecureSubmit library, and add a few lines of initialization code. It's that simple!
-
 
 > For Automatic Javascript For Tokenization
 
@@ -102,7 +103,7 @@ var tokenValue, tokenType, tokenExpire;
 
 hps.tokenize({
     data: {
-      public_key: {{PUBLICAPIKEY}},
+      public_key: "pkapi_cert_YS5lWAwgoWVLmyVToq",
       number: 4242424242424242,
       cvc: 123,
       exp_month: 12,

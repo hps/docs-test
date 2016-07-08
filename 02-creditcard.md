@@ -26,7 +26,8 @@ Address | A HpsAddress object that contains the users address information
 {% highlight csharp %}
 var cardHolder = new HpsCardHolder()
 {
-	Address = new HpsAddress() { Zip = "47130" }    // Zip is required, but pass over as much as you have
+    // Zip is required, but pass over as much as you have
+    Address = new HpsAddress() { Zip = "47130" }
 };
 {% endhighlight %}
 
@@ -55,7 +56,8 @@ card_holder.address.zip = '75024'
 
 {% highlight js %}
 var cardHolder = {
-    address: { zip: "47130" }    // Zip is the only required address field.
+    // Zip is required, but pass over as much as you have
+    address: { zip: "47130" }
 };
 {% endhighlight %}
 
@@ -113,7 +115,7 @@ response = credit_service.charge(10, 'usd', "put single or multi-use token here"
 {% endhighlight %}
 
 {% highlight js %}
-creditService.chargeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, response) {
+creditService.chargeWithToken(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, response) {
   if (err) {
     // handle error
     return;
@@ -172,7 +174,7 @@ response = credit_service.verify("put single or multi-use token here", card_hold
 {% endhighlight %}
 
 {% highlight js %}
-creditService.verifyWithCard("put single or multi-use token here", cardHolder, function (err, response) {
+creditService.verifyWithToken("put single or multi-use token here", cardHolder, function (err, response) {
   if (err) {
     // handle error
     return;
@@ -220,7 +222,7 @@ response = credit_service.authorize(10, 'usd', "put single or multi-use token he
 {% endhighlight %}
 
 {% highlight js %}
-creditService.authorizeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, response) {
+creditService.authorizeWithToken(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, response) {
   if (err) {
     // handle error
     return;
@@ -288,6 +290,10 @@ auth_response = credit_service.authorize(10, 'usd', credit_card, card_holder, Tr
 auth_token = auth_response.token_data.token_value
 {% endhighlight %}
 
+{% highlight js %}
+// coming soon
+{% endhighlight %}
+
 > Charging a multi-use token
 
 {% highlight csharp %}
@@ -313,6 +319,10 @@ charge_service.charge(10, "usd", charge_token, card_holder)
 response = credit_service.charge(10, 'usd', charge_token, card_holder)
 {% endhighlight %}
 
+{% highlight js %}
+// coming soon
+{% endhighlight %}
+
 > Authorizing a multi-use token
 
 {% highlight csharp %}
@@ -336,6 +346,10 @@ charge_service.authorize(10, "usd", auth_token, card_holder)
 
 {% highlight python %}
 response = credit_service.authorize(10, 'usd', auth_token, card_holder)
+{% endhighlight %}
+
+{% highlight js %}
+// coming soon
 {% endhighlight %}
 
 ### Returns: HpsCharge | HpsAuthorization
@@ -408,22 +422,18 @@ capture_response = credit_service.capture(auth_response.transaction_id)
 {% endhighlight %}
 
 {% highlight js %}
-var response;
-
-creditService.authorizeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, resp) {
+creditService.authorizeWithToken(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, response) {
   if (err) return;
-  response = resp;
-});
 
-creditService.capture(response.transactionId, 10, function (err, resp) {
-  // Do something with the response
+  creditService.capture(response.transactionId, 10, function (err, resp) {
+    // Do something with the response
+  });
 });
 {% endhighlight %}
 
 ## Refund a Transaction
 
 The credit return transaction returns funds to the cardholder. The transaction is generally used as a counterpart to a credit card transaction that needs to be reversed, and the batch containing the original transaction has already been closed. The credit return transaction is placed in the current open batch. If a batch is not open, this transaction will create an open batch.
-
 
 ### Parameters:
 
@@ -466,15 +476,12 @@ refund_response = credit_service.refund(10, 'usd', charge_response.transaction_i
 {% endhighlight %}
 
 {% highlight js %}
-var response;
-
-creditService.chargeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, resp) {
+creditService.chargeWithToken(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, response) {
   if (err) return;
-  response = resp;
-});
 
-creditService.refundWithTransactionId(10, 'usd', response.transactionId, null, null, function (err, resp) {
-  // Do something with the response
+  creditService.refundWithTransactionId(10, 'usd', response.transactionId, null, null, function (err, resp) {
+    // Do something with the response
+  });
 });
 {% endhighlight %}
 
@@ -522,15 +529,12 @@ reverse_response = credit_service.reverse(auth_response.transaction_id, 10, 'usd
 {% endhighlight %}
 
 {% highlight js %}
-var response;
-
-creditService.chargeWithCard(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, resp) {
+creditService.chargeWithToken(10, "usd", "put single or multi-use token here", cardHolder, false, null, function (err, response) {
   if (err) return;
-  response = resp;
-});
 
-creditService.reverseWithTransactionId(10, 'usd', response.transactionId, null, function (err, resp) {
-  // Do something with the response
+  creditService.reverseWithTransactionId(10, 'usd', response.transactionId, null, function (err, resp) {
+    // Do something with the response
+  });
 });
 {% endhighlight %}
 
@@ -578,6 +582,10 @@ auth_response = credit_service.authorize(10, 'usd', "put single or multi-use tok
 void_response = credit_service.void(auth_response.transaction_id)
 {% endhighlight %}
 
+{% highlight js %}
+// coming soon
+{% endhighlight %}
+
 ## Edit a Transaction
 
 An edit transaction changes the data on a previously approved Charge or Authorize transaction.
@@ -621,4 +629,8 @@ charge_service.edit(response.transactionId, 15, 5);
 {% highlight python %}
 auth_response = credit_service.authorize(10, 'usd', "put a single or multi-use token here", card_holder)
 void_response = credit_service.edit(auth_response.transaction_id, 15, 5)
+{% endhighlight %}
+
+{% highlight js %}
+// coming soon
 {% endhighlight %}
