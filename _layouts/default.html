@@ -42,7 +42,7 @@ under the License. -->
         {% if node.url == page.url %}
           <div id="toc"></div>
         {% else %}
-          <a href="{{ node.url | prepend: '/Documentation/Index' }}">{{ node.title }}</a>
+          <a href="{{ node.url | prepend: '/Documentation' }}">{{ node.title }}</a>
         {% endif %}
       </li>
     {% endfor %}
