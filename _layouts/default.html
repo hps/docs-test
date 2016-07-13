@@ -84,6 +84,9 @@ under the License. -->
 
           $('#docs-toc').appendTo('.sidebar-menu .nav-sdks-documentation');
 		  
+		  $('#docs-toc').clone().appendTo('.mobile-docs-nav');
+		  $('.mobile-docs-nav #docs-toc').addClass("dropdown-menu");
+		  
         });
   }(window, window.document));
 </script>
