@@ -76,12 +76,14 @@ under the License. -->
 <script type="text/javascript">
   (function (window, document, undefined) {
       $(document).ready(function() {
+	  
           window.languagesJSON = {{ site.data.language_tabs | map: 'key' | jsonify}};
 
           $('.search, .search-results').appendTo('.nav-sdks-documentation');
           $('.search, .search-results').hide();
 
-          $('#docs-toc').appendTo('.nav-sdks-documentation');
+          $('#docs-toc').appendTo('.sidebar-menu .nav-sdks-documentation');
+		  
         });
   }(window, window.document));
 </script>
