@@ -11,6 +11,7 @@ This is a wrapper for the Activation device service. The first step is to get an
 > Create an HpsActivationServiceConfig object for settings.
 
 {% highlight php %}
+<?php
 $config = new HpsActivationServiceConfig();
 $config->setIsTest(true); //Use for certifications and develpoment testing.  false by default.
 {% endhighlight %}
@@ -61,6 +62,7 @@ SecretApiKey | The API used in future calls. Store securely.
 > Activate your device
 
 {% highlight php %}
+<?php
 //Create the config as mentioned above
 $config = new \HpsActivationServiceConfig();
 $config->setIsTest(true); //Use for certifications and develpoment testing.  false by default.
