@@ -23,8 +23,8 @@ Filter By | Filter the result set by transaction type
 Properties | Description
 --------- | -----------
 Amount | Amount of the transaction
-SettlementAmount : Settlement amount of transaction
-OriginalTransactionId : If the transaction performed an action on a previous transaction, this field records the transaction that was acted upon.
+SettlementAmount | Settlement amount of transaction
+OriginalTransactionId | If the transaction performed an action on a previous transaction, this field records the transaction that was acted upon.
 MaskedCardNumber | Shows card number with astericks in all but last 4 digits
 TransactionType | The type of transaction such as charge, refund, void etc
 TransactionUtcDate | Date of transaction
