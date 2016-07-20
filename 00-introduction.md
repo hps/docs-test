@@ -8,7 +8,7 @@ layout: default
 
 You no longer have to worry about the burdens of PCI compliance because card data never touches your server. The exchange of sensitive information occurs directly between the consumer and Heartland Payment Systems through our Portico Gateway. Our convention-based jQuery plugin streamlines this process so you don't have to worry about obtaining tokens. The plugin handles that request and appends the resulting token to your form before it posts.
 
-The SecureSubmit API Library is available in many different languages: PHP, .Net, Java, Ruby, and Python. This documentation is intended to speed up the process of implementing the SDK into your solution by providing sample code and instructions
+The Secure Submit API Library is available in many different languages: PHP, .Net, Java, Ruby, and Python. This documentation is intended to speed up the process of implementing the SDK into your solution by providing sample code and instructions
 
 > Current Language
 
@@ -49,77 +49,89 @@ You are not alone! If you have any questions while you are working through your 
 
 ## Single-Use Tokenization
 
-The quickest way to get up and running with SecureSubmit is to adhere to our naming conventions when marking up your payment form. Note that the name attributes are not included for any fields that contain card data. This prevents those fields from posting to your server, which is critical in order to avoid PCI requirements. The SecureSubmit plugin attempts to remove those attributes programmatically if they exists, but it is best not to include them.
+The most secure way to get up and running with Secure Submit is to use our iFrame-hybrid tokenization solution.
 
 > Basic HTML Payment Form
 
 {% highlight html %}
-<form id="payment_form" method="post" action="Process">
+<form id="payment_form" method="post" action="/process">
+  <!-- Your payment fields go here -->
+  <dt><label for="iframesCardNumber">Card Number:</label></dt>
+  <dd><div id="iframesCardNumber"></div></dd>
 
-    <!-- Your payment fields go here -->
+  <dt><label for="iframesCardExpiration">Card Expiration:</label></dt>
+  <dd><div id="iframesCardExpiration"></div></dd>
 
-    <label for="card_number">Card number:</label>
-    <input type="text" id="card_number" value="" />
+  <dt><label for="iframesCardCvv">Card CVV:</label></dt>
+  <dd><div id="iframesCardCvv"></div></dd>
 
-    <label for="card_cvc">Card cvc:</label>
-    <input type="text" id="card_cvc" value="" />
+  <br />
+  <div id="iframesSubmit"></div>
 
-    <label for="exp_month">Exp month:</label>
-    <input type="text" id="exp_month" value="" />
-
-    <label for="exp_year">Exp year:</label>
-    <input type="text" id="exp_year" value="" />
-
-    <input type="submit" value="Submit Payment" />
+  <!-- Regular input fields are ok, too -->
+  <input type="hidden" name="payment_token" />
 </form>
 {% endhighlight %}
 
-SecureSubmit is packaged as a Javascript library. All you need to do is include the SecureSubmit library, and add a few lines of initialization code. It's that simple!
+### Where are the payment fields?
 
-> For Automatic Javascript For Tokenization
+You may have noticed there are no actual `input` fields in the HTML above. Congratulations! You've discovered how we can [reduce your PCI-DSS scope](/resource/download/coalfire-white-paper/) by moving a large portion of the payment acceptance process away from your site.
 
-{% highlight html %}
-<script src="securesubmit.js"></script>
-<script type="text/javascript">
-$(function () {
+To achieve this, our Javascript library inserts tiny iFrames pointed to solitary `input` fields on our payment gateway into those empty `div` elements above. Even though the fields themselves are displayed through iFrames and are hosted on our payment gateway, they integrate seemlessly into your existing payment form on your web site, keeping your customers where they should be&hellip;_on your web site_. This can help reduce your PCI scope down to the SAQ-A form (aka the short form) since the customer is inputting their card data onto our servers and all your site has access to is a single-use payment token.
 
-    $("#payment_form").SecureSubmit({
-        public_key: "pkapi_cert_YS5lWAwgoWVLmyVToq",
-        error: function (response) {
-            console.log(response);
-        }
-    });
+Secure Submit is packaged as a Javascript library. All you need to do is include the Secure Submit library, and add a few lines of initialization code. It's that simple!
 
-});
-</script>
-{% endhighlight %}
-
-> Manual Javascript For Tokenization
+> Necessary Javascript for Tokenization
 
 {% highlight html %}
-<script src="securesubmit.js"></script>
+<script src="https://api.heartlandportico.com/SecureSubmit.v1/token/2.1/securesubmit.js"></script>
 <script type="text/javascript">
-var tokenValue, tokenType, tokenExpire;
-
-hps.tokenize({
-    data: {
-      public_key: "pkapi_cert_YS5lWAwgoWVLmyVToq",
-      number: 4242424242424242,
-      cvc: 123,
-      exp_month: 12,
-      exp_year: 2015
+(function (window, document, Heartland) {
+  var hps = new Heartland.HPS({
+    publicKey: 'pkapi_cert_YS5lWAwgoWVLmyVToq',
+    type:      'iframe',
+    fields: {
+      cardNumber: {
+        target:      'iframesCardNumber',
+        placeholder: '•••• •••• •••• ••••'
+      },
+      cardExpiration: {
+        target:      'iframesCardExpiration',
+        placeholder: 'MM / YYYY'
+      },
+      cardCvv: {
+        target:      'iframesCardCvv',
+        placeholder: 'CVV'
+      },
+      submit: {
+        target:      'iframesSubmit'
+      }
     },
-    success: function (response) {
-      /** Place additional validation/business logic here. */
-
-      tokenValue = response.token_value;
-      tokenType = response.token_type;
-      tokenExpire = response.token_expire;
+    onTokenSuccess: function (resp) {
+      var form = document.getElementById('payment_form');
+      var payment_token = document.getElementById('payment_token');
+      payment_token.value = resp.token_value;
+      payment_form.submit();
     },
-    error: function (response) {
-      /** Handle Token Error */
+    onTokenError: function (resp) {
+      if (window.console && window.console.log) {
+        console.log('There was an error: ' + resp.error.message);
+      }
     }
   });
+
+  Heartland.Events.addHandler(document.getElementById('iframes'), 'submit', function (e) {
+    e.preventDefault();
+    hps.Messages.post(
+      {
+        accumulateData: true,
+        action:         'tokenize',
+        message:        'pkapi_cert_YS5lWAwgoWVLmyVToq'
+      },
+      'cardNumber'
+    );
+  });
+}(window, document, Heartland);
 </script>
 {% endhighlight %}
 
@@ -128,9 +140,15 @@ You'll need to replace the public_key with the key you received from us during t
 </aside>
 
 <aside class="success">
-That's all you need! When the consumer submits the form, a token_value field is added that contains a single-use payment token. This token can be used to make a payment and request a multi-use token. Be sure to let your Heartland representative know if you are interested in implementing a recurring payment system with our multi-use tokens. There are additional options that must be configured during the boarding process.
+That's all you need! When the consumer submits the form, the `payment_token` field is updated to contain a single-use payment token. This token can be used to make a payment and request a multi-use token. Be sure to let your Heartland representative know if you are interested in implementing a recurring payment system with our multi-use tokens. There are additional options that must be configured during the boarding process.
 </aside>
 
 ## Validation
 
-If you're using the jQuery Validation plugin, everything will just work. We check to make sure the form is valid before requesting a token and halt all processing if there are errors. We also provide a success handler for those who wish to implement their own validation or require a little more fine-grained control. Our plugin evaluates the results of that success handler and halts processing of the form if it returns false. We also pass the results of the token request into the specified success handler for those who need access to the actual single-use payment token. This gives you the flexibility to implement your own solutions in the event that our defalut behavior doesn't meet your requirements.
+Worried about bad data being entered? Our iFrame-based fields have a set of functions to help your customers during their checkout process. All fields only allow customers to input numbers, preventing the accidental letter and/or symbol from creating a problem, and each one also adds a CSS class of `.valid` or `.invalid` to make styling good or bad data easier, pin-pointing problems for your customers as early as possible.
+
+While on the subject of visual cues, the card number field will also add a CSS class of the form `.card-type-{card brand}`, allowing the card brand logos to be displayed for the customer and adding one more visual validation that the card information is correct.
+
+## See It in Action
+
+Head over to the [Tokenization Demo](/documentation/tokenization-demo/) to learn more about our Javascript tokenization solution and to see it in action!
